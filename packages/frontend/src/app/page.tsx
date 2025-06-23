@@ -5,6 +5,9 @@ import { useVibeNFT } from '@/lib/hooks/useVibeNFT';
 import { NFTGenerator } from '@/components/NFTGenerator';
 import { ethers } from 'ethers'
 
+// Configurable flag: set to true to always show the NFT generator (for testing)
+const SHOW_NFT_GENERATOR_ALWAYS = process.env.NEXT_PUBLIC_SHOW_NFT_GENERATOR_ALWAYS === 'true';
+
   // Helper to ellipsize an address
   function ellipsizeAddress(address?: string) {
     if (!address) return '';
@@ -77,7 +80,13 @@ export default function Home() {
           {/* Generate Section */}
           <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6">
             <h2 className="text-2xl font-bold text-white mb-6">Generate NFT</h2>
-            <NFTGenerator />
+            {(SHOW_NFT_GENERATOR_ALWAYS || canMint) ? (
+              <NFTGenerator />
+            ) : (
+              <div className="text-center text-gray-400 py-8">
+                <p>You are not eligible to generate a new NFT.</p>
+              </div>
+            )}
           </div>
 
           {/* Display Section */}
