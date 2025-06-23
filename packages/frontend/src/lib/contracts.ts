@@ -1,4 +1,4 @@
-import { ethers } from 'ethers';
+// import { ethers } from 'ethers'; // (removed, not used)
 import { Abi, parseAbi } from 'viem';
 
 // ERC-20 interface for balance checking

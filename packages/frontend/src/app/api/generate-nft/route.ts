@@ -3,7 +3,7 @@ import OpenAI from 'openai';
 import PinataSDK from '@pinata/sdk';
 import { ethers } from 'ethers';
 import { Readable } from 'stream';
-import { VIBE_NFT_ABI, getVibeNFTContractAddress } from '@/lib/contracts';
+import { getVibeNFTContractAddress } from '@/lib/contracts';
 
 // ERC-20 ABI for ethers.js compatibility
 const ERC20_ABI_ETHERS = [

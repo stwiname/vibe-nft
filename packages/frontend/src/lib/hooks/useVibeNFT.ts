@@ -65,7 +65,7 @@ export function useVibeNFT() {
     query: { enabled: !!contractAddress && !!address }
   });
 
-  const { data: requiredTokenAddress, isFetched, error: requiredTokenAddressError } = useReadContract({
+  const { data: requiredTokenAddress } = useReadContract({
     address: contractAddress,
     abi: VIBE_NFT_ABI,
     functionName: 'requiredToken',

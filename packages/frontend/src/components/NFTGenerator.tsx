@@ -4,6 +4,14 @@ import { useState } from 'react';
 import { useVibeNFT } from '@/lib/hooks/useVibeNFT';
 import { useAccount } from 'wagmi';
 
+interface NFTMetadata {
+  name: string;
+  description: string;
+  image: string;
+  attributes?: Array<{ trait_type: string; value: string }>;
+  [key: string]: unknown;
+}
+
 interface NFTGenerationResult {
   imageCid: string;
   imageUrl: string;
@@ -11,7 +19,7 @@ interface NFTGenerationResult {
   metadataCid: string;
   metadataUrl: string;
   signature: string;
-  metadata: any;
+  metadata: NFTMetadata;
 }
 
 export function NFTGenerator() {
@@ -211,17 +219,17 @@ export function NFTGenerator() {
                 </div>
                 <div className="flex justify-between">
                   <span className="text-gray-300">Prompt:</span>
-                  <span className="font-medium max-w-[200px] truncate text-white" title={result.metadata.attributes[0].value}>
-                    {result.metadata.attributes[0].value}
+                  <span className="font-medium max-w-[200px] truncate text-white" title={result.metadata.attributes?.[0]?.value || ''}>
+                    {result.metadata.attributes?.[0]?.value || ''}
                   </span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-gray-300">Style:</span>
-                  <span className="font-medium text-white">{result.metadata.attributes[1].value}</span>
+                  <span className="font-medium text-white">{result.metadata.attributes?.[1]?.value || ''}</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-gray-300">Generator:</span>
-                  <span className="font-medium text-white">{result.metadata.attributes[2].value}</span>
+                  <span className="font-medium text-white">{result.metadata.attributes?.[2]?.value || ''}</span>
                 </div>
               </div>
             </div>
