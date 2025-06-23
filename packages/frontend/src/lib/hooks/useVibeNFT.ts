@@ -42,14 +42,14 @@ export function useVibeNFT() {
   const contractAddress = useMemo(() => chainId ? getVibeNFTContractAddress(chainId) : undefined, [chainId]);
 
   // Read contract data
-  const { data: totalSupply } = useReadContract({
+  const { data: totalSupply, refetch: refetchTotalSupply } = useReadContract({
     address: contractAddress,
     abi: VIBE_NFT_ABI,
     functionName: 'totalSupply',
     query: { enabled: !!contractAddress }
   });
 
-  const { data: canMint } = useReadContract({
+  const { data: canMint, refetch: refetchCanMint } = useReadContract({
     address: contractAddress,
     abi: VIBE_NFT_ABI,
     functionName: 'canMint',
@@ -57,7 +57,7 @@ export function useVibeNFT() {
     query: { enabled: !!contractAddress && !!address }
   });
 
-  const { data: requiredTokenBalance } = useReadContract({
+  const { data: requiredTokenBalance, refetch: refetchRequiredTokenBalance } = useReadContract({
     address: contractAddress,
     abi: VIBE_NFT_ABI,
     functionName: 'getRequiredTokenBalance',
@@ -65,7 +65,7 @@ export function useVibeNFT() {
     query: { enabled: !!contractAddress && !!address }
   });
 
-  const { data: requiredTokenAddress } = useReadContract({
+  const { data: requiredTokenAddress, refetch: refetchRequiredTokenAddress } = useReadContract({
     address: contractAddress,
     abi: VIBE_NFT_ABI,
     functionName: 'requiredToken',
@@ -222,6 +222,10 @@ export function useVibeNFT() {
   useEffect(() => {
     if (isSuccess) {
       fetchNFTs();
+      refetchTotalSupply();
+      refetchCanMint();
+      refetchRequiredTokenBalance();
+      refetchRequiredTokenAddress();
     }
   }, [isSuccess]);
 
