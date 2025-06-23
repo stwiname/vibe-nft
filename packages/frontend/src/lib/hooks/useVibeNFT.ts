@@ -152,7 +152,8 @@ export function useVibeNFT() {
         }
       }
       
-      setNfts(nftData);
+      // Only include NFTs owned by the current user
+      setNfts(address ? nftData.filter(nft => nft.owner.toLowerCase() === address.toLowerCase()) : []);
     } catch (err) {
       console.error('Error fetching NFTs:', err);
       setError('Failed to fetch NFTs');

@@ -75,8 +75,6 @@ export function NFTGenerator() {
     
     try {
       await mintNFT(result.metadataUrl, result.signature);
-      // Clear the result after successful mint
-      setResult(null);
     } catch (error) {
       console.error('Mint failed:', error);
       alert('Mint failed. Check console for details.');
@@ -154,22 +152,20 @@ export function NFTGenerator() {
             <h4 className="font-medium mb-3 text-center text-white">Generated Image</h4>
             <div className="relative group">
               <img
-                src={getImageUrl(result.imageUrl)}
+                src={result.originalImageUrl || getImageUrl(result.imageUrl)}
                 alt="Generated NFT"
                 className="w-full h-64 object-cover rounded-lg shadow-lg group-hover:scale-105 transition-transform duration-300"
                 onError={(e) => {
-                  console.error('IPFS image failed to load:', result.imageUrl);
                   const target = e.target as HTMLImageElement;
-                  // Try original OpenAI URL as fallback
-                  if (result.originalImageUrl) {
-                    console.log('Trying original OpenAI URL as fallback:', result.originalImageUrl);
-                    target.src = result.originalImageUrl;
+                  // Fallback to IPFS image if originalImageUrl fails
+                  if (result.originalImageUrl && target.src !== getImageUrl(result.imageUrl)) {
+                    target.src = getImageUrl(result.imageUrl);
                   } else {
                     target.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDIwMCAyMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIiBmaWxsPSJ1cmwoI2dyYWRpZW50KSIvPgo8ZGVmcz4KPGxpbmVhckdyYWRpZW50IGlkPSJncmFkaWVudCIgeDE9IjAiIHkxPSIwIiB4Mj0iMjAwIiB5Mj0iMjAwIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+CjxzdG9wIG9mZnNldD0iMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiM4QjVGRkY7c3RvcC1vcGFjaXR5OjEiLz4KPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdHlsZT0ic3RvcC1jb2xvcjojRjA3M0Y2O3N0b3Atb3BhY2l0eToxIi8+CjwvbGluZWFyR3JhZGllbnQ+CjwvZGVmcz4KPC9zdmc+';
                   }
                 }}
                 onLoad={() => {
-                  console.log('Image loaded successfully:', getImageUrl(result.imageUrl));
+                  console.log('Image loaded successfully:', result.originalImageUrl || getImageUrl(result.imageUrl));
                 }}
               />
               <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 rounded-lg flex items-center justify-center opacity-0 group-hover:opacity-100">

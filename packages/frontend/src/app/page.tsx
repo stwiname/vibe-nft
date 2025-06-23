@@ -4,6 +4,7 @@ import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { useVibeNFT } from '@/lib/hooks/useVibeNFT';
 import { NFTGenerator } from '@/components/NFTGenerator';
 import { ethers } from 'ethers'
+import { useAccount } from 'wagmi';
 
 // Configurable flag: set to true to always show the NFT generator (for testing)
 const SHOW_NFT_GENERATOR_ALWAYS = process.env.NEXT_PUBLIC_SHOW_NFT_GENERATOR_ALWAYS === 'true';
@@ -34,6 +35,7 @@ const SHOW_NFT_GENERATOR_ALWAYS = process.env.NEXT_PUBLIC_SHOW_NFT_GENERATOR_ALW
 
 export default function Home() {
   const { nfts, loading, error, tokenBalanceInfo, canMint } = useVibeNFT();
+  const { isConnected } = useAccount();
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900">
@@ -43,6 +45,13 @@ export default function Home() {
           <h1 className="text-4xl font-bold text-white">Vibe NFT</h1>
           <ConnectButton />
         </div>
+
+        {/* Prompt to connect wallet */}
+        {!isConnected && (
+          <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-4 mb-8 text-center">
+            <p className="text-yellow-300 text-lg font-medium">Please connect your wallet to use the app features.</p>
+          </div>
+        )}
 
         {/* Token Requirement Info */}
         {tokenBalanceInfo && (
