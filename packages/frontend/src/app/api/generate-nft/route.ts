@@ -163,9 +163,6 @@ export async function GET(request: NextRequest) {
     // Sign the typed data using EIP-712
     const signature = await wallet.signTypedData(domain, types, value);
 
-    // Verify the signature can be recovered to the correct address
-    const recovered = ethers.verifyTypedData(domain, types, value, signature);
-
 
     // Step 7: Return the results
     console.log('Returning results');
