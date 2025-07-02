@@ -2,6 +2,7 @@ import { useState, useEffect, useMemo } from 'react';
 import { useAccount, usePublicClient, useReadContract, useWriteContract, useWaitForTransactionReceipt } from 'wagmi';
 import { ethers } from 'ethers';
 import { getVibeNFTContractAddress, VIBE_NFT_ABI, ERC20_ABI } from '@/lib/contracts';
+import { fetchNFTsFromSubQuery, SubQueryNFT } from '../subquery';
 
 export interface NFTData {
   tokenId: string;
@@ -88,75 +89,59 @@ export function useVibeNFT() {
   });
 
   const fetchNFTs = async () => {
-    if (!contractAddress || !publicClient || !totalSupply) return;
-
+    if (!address || !contractAddress || !publicClient) return;
     try {
       setLoading(true);
       setError(null);
-      
-      const nftData: NFTData[] = [];
-      const supply = Number(totalSupply);
-      
-      // Fetch all NFTs
-      for (let i = 0; i < supply; i++) {
+      const subqueryNFTs: SubQueryNFT[] = await fetchNFTsFromSubQuery(address);
+      const nftData: NFTData[] = await Promise.all(subqueryNFTs.map(async (nft) => {
+        let uri = '';
+        let metadata = undefined;
+        let imageUrl = undefined;
         try {
-          const [tokenId, owner, uri] = await Promise.all([
-            publicClient.readContract({
-              address: contractAddress,
-              abi: VIBE_NFT_ABI,
-              functionName: 'tokenByIndex',
-              args: [BigInt(i)]
-            }),
-            publicClient.readContract({
-              address: contractAddress,
-              abi: VIBE_NFT_ABI,
-              functionName: 'ownerOf',
-              args: [BigInt(i)]
-            }),
-            publicClient.readContract({
-              address: contractAddress,
-              abi: VIBE_NFT_ABI,
-              functionName: 'tokenURI',
-              args: [BigInt(i)]
-            })
-          ]);
-          
+          // Fetch tokenURI from contract
+          uri = await publicClient.readContract({
+            address: contractAddress,
+            abi: VIBE_NFT_ABI,
+            functionName: 'tokenURI',
+            args: [BigInt(nft.id)]
+          }) as string;
           // Fetch metadata from URI
-          let metadata;
-          let imageUrl;
-          try {
-            const metadataUri = uri as string;
-            const response = await fetch(metadataUri.replace('ipfs://', 'https://ipfs.io/ipfs/'));
+          if (uri) {
+            const response = await fetch(uri.replace('ipfs://', 'https://ipfs.io/ipfs/'));
             if (response.ok) {
               metadata = await response.json();
-              // Extract image URL and convert IPFS to HTTP if needed
               if (metadata.image) {
-                imageUrl = metadata.image.startsWith('ipfs://') 
+                imageUrl = metadata.image.startsWith('ipfs://')
                   ? metadata.image.replace('ipfs://', 'https://ipfs.io/ipfs/')
                   : metadata.image;
               }
             }
-          } catch (metadataError) {
-            console.error(`Error fetching metadata for token ${i}:`, metadataError);
           }
-          
-          nftData.push({
-            tokenId: (tokenId as bigint).toString(),
-            uri: uri as string,
-            owner: owner as string,
-            metadata,
-            imageUrl
-          });
-        } catch (err) {
-          console.error(`Error fetching token ${i}:`, err);
+        } catch (metadataError) {
+          console.error(`Error fetching tokenURI or metadata for token ${nft.id}:`, metadataError);
         }
-      }
-      
-      // Only include NFTs owned by the current user
-      setNfts(address ? nftData.filter(nft => nft.owner.toLowerCase() === address.toLowerCase()) : []);
+        return {
+          tokenId: nft.id,
+          uri,
+          owner: nft.owner,
+          metadata,
+          imageUrl
+        };
+      }));
+      setNfts(nftData);
     } catch (err) {
-      console.error('Error fetching NFTs:', err);
-      setError('Failed to fetch NFTs');
+      console.error('Error fetching NFTs from SubQuery:', err);
+      let errorMessage = 'Failed to fetch NFTs from SubQuery';
+      if (err instanceof Error) {
+        errorMessage += `: ${err.message}`;
+        if (err.stack) errorMessage += `\nStack: ${err.stack}`;
+      } else if (typeof err === 'string') {
+        errorMessage += `: ${err}`;
+      } else {
+        errorMessage += `: 'Unknown error'`;
+      }
+      setError(errorMessage);
     } finally {
       setLoading(false);
     }
