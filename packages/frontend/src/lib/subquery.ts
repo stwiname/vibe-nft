@@ -1,5 +1,3 @@
-import { NFTData } from './hooks/useVibeNFT';
-
 export interface SubQueryNFT {
   id: string;
   owner: string;
