@@ -8,6 +8,7 @@ export interface SubQueryNFT {
   lastTransferredTimestamp: string;
 }
 
+
 export async function fetchNFTsFromSubQuery(owner: string): Promise<SubQueryNFT[]> {
   const query = `
     query GetUserNFTs($owner: String!) {

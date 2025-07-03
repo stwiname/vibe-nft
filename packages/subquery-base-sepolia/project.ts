@@ -13,6 +13,9 @@ const mode = process.env.NODE_ENV || 'production';
 const dotenvPath = path.resolve(__dirname, `.env${mode !== 'production' ? `.${mode}` : ''}`);
 dotenv.config({ path: dotenvPath });
 
+const startHeight = process.env.START_HEIGHT ? parseInt(process.env.START_HEIGHT, 10) : 27264282;
+const contractAddress = process.env.CONTRACT_ADDRESS || '0xaAE9233dd84d24cd98124e6E8dA62079C9CdBC0d';
+
 // Can expand the Datasource processor types via the generic param
 const project: EthereumProject = {
   specVersion: "1.0.0",
@@ -51,10 +54,10 @@ const project: EthereumProject = {
   },
   dataSources: [{
     kind: EthereumDatasourceKind.Runtime,
-    startBlock: 27264282,
+    startBlock: startHeight,
     options: {
       abi: 'VibeNFT',
-      address: '0xaAE9233dd84d24cd98124e6E8dA62079C9CdBC0d',
+      address: contractAddress,
     },
     assets: new Map([['VibeNFT', {file: './abis/VibeNFT.json'}]]),
     mapping: {
