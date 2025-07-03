@@ -44,9 +44,6 @@ importers:
 
   packages/frontend:
     dependencies:
-      '@apollo/client':
-        specifier: ^3.13.8
-        version: 3.13.8(@types/react@19.1.8)(graphql-ws@6.0.5(crossws@0.3.5)(graphql@15.10.1)(ws@8.18.0(bufferutil@4.0.9)(utf-8-validate@5.0.10)))(graphql@15.10.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(subscriptions-transport-ws@0.11.0(bufferutil@4.0.9)(graphql@15.10.1)(utf-8-validate@5.0.10))
       '@pinata/sdk':
         specifier: ^2.1.0
         version: 2.1.0
@@ -62,9 +59,6 @@ importers:
       ethers:
         specifier: ^6.14.4
         version: 6.14.4(bufferutil@4.0.9)(utf-8-validate@5.0.10)
-      graphql-ws:
-        specifier: ^6.0.5
-        version: 6.0.5(crossws@0.3.5)(graphql@15.10.1)(ws@8.18.0(bufferutil@4.0.9)(utf-8-validate@5.0.10))
       next:
         specifier: 15.3.4
         version: 15.3.4(@opentelemetry/api@1.9.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
@@ -80,9 +74,6 @@ importers:
       react-dom:
         specifier: ^19.0.0
         version: 19.1.0(react@19.1.0)
-      subscriptions-transport-ws:
-        specifier: ^0.11.0
-        version: 0.11.0(bufferutil@4.0.9)(graphql@15.10.1)(utf-8-validate@5.0.10)
       viem:
         specifier: ^2.31.3
         version: 2.31.3(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10)(zod@3.22.4)
@@ -132,7 +123,7 @@ importers:
         version: 5.14.0(@types/node@22.7.5)(pg@8.16.3)(webpack@5.99.9)
       '@subql/node-ethereum':
         specifier: latest
-        version: 6.1.1(@ethersproject/abi@5.8.0)(@ethersproject/providers@5.8.0(bufferutil@4.0.9)(utf-8-validate@5.0.10))(@polkadot/api@15.10.2(bufferutil@4.0.9)(utf-8-validate@5.0.10))(@subql/utils@2.20.0(pg@8.16.3))(bufferutil@4.0.9)(class-transformer@0.5.1)(class-validator@0.14.2)(encoding@0.1.13)(graphql-ws@6.0.5(crossws@0.3.5)(graphql@15.10.1)(ws@8.18.2(bufferutil@4.0.9)(utf-8-validate@5.0.10)))(graphql@15.10.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(rxjs@7.8.2)(subscriptions-transport-ws@0.11.0(bufferutil@4.0.9)(graphql@15.10.1)(utf-8-validate@5.0.10))(typescript@5.8.3)(utf-8-validate@5.0.10)
+        version: 6.1.1(@ethersproject/abi@5.8.0)(@ethersproject/providers@5.8.0(bufferutil@4.0.9)(utf-8-validate@5.0.10))(@polkadot/api@15.10.2(bufferutil@4.0.9)(utf-8-validate@5.0.10))(@subql/utils@2.20.0(pg@8.16.3))(@types/react@19.1.8)(bufferutil@4.0.9)(class-transformer@0.5.1)(class-validator@0.14.2)(encoding@0.1.13)(graphql-ws@6.0.5(crossws@0.3.5)(graphql@15.10.1)(ws@8.18.2(bufferutil@4.0.9)(utf-8-validate@5.0.10)))(graphql@15.10.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(rxjs@7.8.2)(subscriptions-transport-ws@0.11.0(bufferutil@4.0.9)(graphql@15.10.1)(utf-8-validate@5.0.10))(typescript@5.8.3)(utf-8-validate@5.0.10)
       '@subql/testing':
         specifier: latest
         version: 2.3.0
@@ -6933,31 +6924,7 @@ snapshots:
       '@jridgewell/gen-mapping': 0.3.8
       '@jridgewell/trace-mapping': 0.3.25
 
-  '@apollo/client@3.13.8(@types/react@19.1.8)(graphql-ws@6.0.5(crossws@0.3.5)(graphql@15.10.1)(ws@8.18.0(bufferutil@4.0.9)(utf-8-validate@5.0.10)))(graphql@15.10.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(subscriptions-transport-ws@0.11.0(bufferutil@4.0.9)(graphql@15.10.1)(utf-8-validate@5.0.10))':
-    dependencies:
-      '@graphql-typed-document-node/core': 3.2.0(graphql@15.10.1)
-      '@wry/caches': 1.0.1
-      '@wry/equality': 0.5.7
-      '@wry/trie': 0.5.0
-      graphql: 15.10.1
-      graphql-tag: 2.12.6(graphql@15.10.1)
-      hoist-non-react-statics: 3.3.2
-      optimism: 0.18.1
-      prop-types: 15.8.1
-      rehackt: 0.1.0(@types/react@19.1.8)(react@19.1.0)
-      symbol-observable: 4.0.0
-      ts-invariant: 0.10.3
-      tslib: 2.8.1
-      zen-observable-ts: 1.2.5
-    optionalDependencies:
-      graphql-ws: 6.0.5(crossws@0.3.5)(graphql@15.10.1)(ws@8.18.0(bufferutil@4.0.9)(utf-8-validate@5.0.10))
-      react: 19.1.0
-      react-dom: 19.1.0(react@19.1.0)
-      subscriptions-transport-ws: 0.11.0(bufferutil@4.0.9)(graphql@15.10.1)(utf-8-validate@5.0.10)
-    transitivePeerDependencies:
-      - '@types/react'
-
-  '@apollo/client@3.13.8(graphql-ws@6.0.5(crossws@0.3.5)(graphql@15.10.1)(ws@8.18.2(bufferutil@4.0.9)(utf-8-validate@5.0.10)))(graphql@15.10.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(subscriptions-transport-ws@0.11.0(bufferutil@4.0.9)(graphql@15.10.1)(utf-8-validate@5.0.10))':
+  '@apollo/client@3.13.8(@types/react@19.1.8)(graphql-ws@6.0.5(crossws@0.3.5)(graphql@15.10.1)(ws@8.18.2(bufferutil@4.0.9)(utf-8-validate@5.0.10)))(graphql@15.10.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(subscriptions-transport-ws@0.11.0(bufferutil@4.0.9)(graphql@15.10.1)(utf-8-validate@5.0.10))':
     dependencies:
       '@graphql-typed-document-node/core': 3.2.0(graphql@15.10.1)
       '@wry/caches': 1.0.1
@@ -9002,9 +8969,9 @@ snapshots:
     transitivePeerDependencies:
       - debug
 
-  '@subql/node-core@18.2.0(@nestjs/core@11.1.3)(@polkadot/api@15.10.2(bufferutil@4.0.9)(utf-8-validate@5.0.10))(class-transformer@0.5.1)(class-validator@0.14.2)(encoding@0.1.13)(graphql-ws@6.0.5(crossws@0.3.5)(graphql@15.10.1)(ws@8.18.2(bufferutil@4.0.9)(utf-8-validate@5.0.10)))(graphql@15.10.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(reflect-metadata@0.1.14)(rxjs@7.8.2)(subscriptions-transport-ws@0.11.0(bufferutil@4.0.9)(graphql@15.10.1)(utf-8-validate@5.0.10))':
+  '@subql/node-core@18.2.0(@nestjs/core@11.1.3)(@polkadot/api@15.10.2(bufferutil@4.0.9)(utf-8-validate@5.0.10))(@types/react@19.1.8)(class-transformer@0.5.1)(class-validator@0.14.2)(encoding@0.1.13)(graphql-ws@6.0.5(crossws@0.3.5)(graphql@15.10.1)(ws@8.18.2(bufferutil@4.0.9)(utf-8-validate@5.0.10)))(graphql@15.10.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(reflect-metadata@0.1.14)(rxjs@7.8.2)(subscriptions-transport-ws@0.11.0(bufferutil@4.0.9)(graphql@15.10.1)(utf-8-validate@5.0.10))':
     dependencies:
-      '@apollo/client': 3.13.8(graphql-ws@6.0.5(crossws@0.3.5)(graphql@15.10.1)(ws@8.18.2(bufferutil@4.0.9)(utf-8-validate@5.0.10)))(graphql@15.10.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(subscriptions-transport-ws@0.11.0(bufferutil@4.0.9)(graphql@15.10.1)(utf-8-validate@5.0.10))
+      '@apollo/client': 3.13.8(@types/react@19.1.8)(graphql-ws@6.0.5(crossws@0.3.5)(graphql@15.10.1)(ws@8.18.2(bufferutil@4.0.9)(utf-8-validate@5.0.10)))(graphql@15.10.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(subscriptions-transport-ws@0.11.0(bufferutil@4.0.9)(graphql@15.10.1)(utf-8-validate@5.0.10))
       '@nestjs/common': 11.1.3(class-transformer@0.5.1)(class-validator@0.14.2)(reflect-metadata@0.1.14)(rxjs@7.8.2)
       '@nestjs/event-emitter': 3.0.1(@nestjs/common@11.1.3(class-transformer@0.5.1)(class-validator@0.14.2)(reflect-metadata@0.1.14)(rxjs@7.8.2))(@nestjs/core@11.1.3)
       '@nestjs/schedule': 5.0.1(@nestjs/common@11.1.3(class-transformer@0.5.1)(class-validator@0.14.2)(reflect-metadata@0.1.14)(rxjs@7.8.2))(@nestjs/core@11.1.3)
@@ -9054,7 +9021,7 @@ snapshots:
       - supports-color
       - tedious
 
-  '@subql/node-ethereum@6.1.1(@ethersproject/abi@5.8.0)(@ethersproject/providers@5.8.0(bufferutil@4.0.9)(utf-8-validate@5.0.10))(@polkadot/api@15.10.2(bufferutil@4.0.9)(utf-8-validate@5.0.10))(@subql/utils@2.20.0(pg@8.16.3))(bufferutil@4.0.9)(class-transformer@0.5.1)(class-validator@0.14.2)(encoding@0.1.13)(graphql-ws@6.0.5(crossws@0.3.5)(graphql@15.10.1)(ws@8.18.2(bufferutil@4.0.9)(utf-8-validate@5.0.10)))(graphql@15.10.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(rxjs@7.8.2)(subscriptions-transport-ws@0.11.0(bufferutil@4.0.9)(graphql@15.10.1)(utf-8-validate@5.0.10))(typescript@5.8.3)(utf-8-validate@5.0.10)':
+  '@subql/node-ethereum@6.1.1(@ethersproject/abi@5.8.0)(@ethersproject/providers@5.8.0(bufferutil@4.0.9)(utf-8-validate@5.0.10))(@polkadot/api@15.10.2(bufferutil@4.0.9)(utf-8-validate@5.0.10))(@subql/utils@2.20.0(pg@8.16.3))(@types/react@19.1.8)(bufferutil@4.0.9)(class-transformer@0.5.1)(class-validator@0.14.2)(encoding@0.1.13)(graphql-ws@6.0.5(crossws@0.3.5)(graphql@15.10.1)(ws@8.18.2(bufferutil@4.0.9)(utf-8-validate@5.0.10)))(graphql@15.10.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(rxjs@7.8.2)(subscriptions-transport-ws@0.11.0(bufferutil@4.0.9)(graphql@15.10.1)(utf-8-validate@5.0.10))(typescript@5.8.3)(utf-8-validate@5.0.10)':
     dependencies:
       '@nestjs/common': 11.1.3(class-transformer@0.5.1)(class-validator@0.14.2)(reflect-metadata@0.1.14)(rxjs@7.8.2)
       '@nestjs/core': 11.1.3(@nestjs/common@11.1.3(class-transformer@0.5.1)(class-validator@0.14.2)(reflect-metadata@0.1.14)(rxjs@7.8.2))(@nestjs/platform-express@11.1.3)(reflect-metadata@0.1.14)(rxjs@7.8.2)
@@ -9063,7 +9030,7 @@ snapshots:
       '@nestjs/schedule': 5.0.1(@nestjs/common@11.1.3(class-transformer@0.5.1)(class-validator@0.14.2)(reflect-metadata@0.1.14)(rxjs@7.8.2))(@nestjs/core@11.1.3)
       '@subql/common': 5.7.0
       '@subql/common-ethereum': 4.9.1(@ethersproject/abi@5.8.0)(@ethersproject/providers@5.8.0(bufferutil@4.0.9)(utf-8-validate@5.0.10))(bufferutil@4.0.9)(class-transformer@0.5.1)(class-validator@0.14.2)(ethers@5.8.0(bufferutil@4.0.9)(utf-8-validate@5.0.10))(typescript@5.8.3)(utf-8-validate@5.0.10)
-      '@subql/node-core': 18.2.0(@nestjs/core@11.1.3)(@polkadot/api@15.10.2(bufferutil@4.0.9)(utf-8-validate@5.0.10))(class-transformer@0.5.1)(class-validator@0.14.2)(encoding@0.1.13)(graphql-ws@6.0.5(crossws@0.3.5)(graphql@15.10.1)(ws@8.18.2(bufferutil@4.0.9)(utf-8-validate@5.0.10)))(graphql@15.10.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(reflect-metadata@0.1.14)(rxjs@7.8.2)(subscriptions-transport-ws@0.11.0(bufferutil@4.0.9)(graphql@15.10.1)(utf-8-validate@5.0.10))
+      '@subql/node-core': 18.2.0(@nestjs/core@11.1.3)(@polkadot/api@15.10.2(bufferutil@4.0.9)(utf-8-validate@5.0.10))(@types/react@19.1.8)(class-transformer@0.5.1)(class-validator@0.14.2)(encoding@0.1.13)(graphql-ws@6.0.5(crossws@0.3.5)(graphql@15.10.1)(ws@8.18.2(bufferutil@4.0.9)(utf-8-validate@5.0.10)))(graphql@15.10.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(reflect-metadata@0.1.14)(rxjs@7.8.2)(subscriptions-transport-ws@0.11.0(bufferutil@4.0.9)(graphql@15.10.1)(utf-8-validate@5.0.10))
       '@subql/testing': 2.3.0
       '@subql/types-ethereum': 4.2.1(bufferutil@4.0.9)(utf-8-validate@5.0.10)
       '@subql/utils': 2.20.0(pg@8.16.3)
@@ -10639,7 +10606,8 @@ snapshots:
 
   axobject-query@4.1.0: {}
 
-  backo2@1.0.2: {}
+  backo2@1.0.2:
+    optional: true
 
   balanced-match@1.0.2: {}
 
@@ -11972,7 +11940,8 @@ snapshots:
 
   eventemitter2@6.4.9: {}
 
-  eventemitter3@3.1.2: {}
+  eventemitter3@3.1.2:
+    optional: true
 
   eventemitter3@5.0.1: {}
 
@@ -12380,13 +12349,6 @@ snapshots:
     dependencies:
       graphql: 15.10.1
       tslib: 2.8.1
-
-  graphql-ws@6.0.5(crossws@0.3.5)(graphql@15.10.1)(ws@8.18.0(bufferutil@4.0.9)(utf-8-validate@5.0.10)):
-    dependencies:
-      graphql: 15.10.1
-    optionalDependencies:
-      crossws: 0.3.5
-      ws: 8.18.0(bufferutil@4.0.9)(utf-8-validate@5.0.10)
 
   graphql-ws@6.0.5(crossws@0.3.5)(graphql@15.10.1)(ws@8.18.2(bufferutil@4.0.9)(utf-8-validate@5.0.10)):
     dependencies:
@@ -13017,7 +12979,8 @@ snapshots:
       p-fifo: 1.0.0
       readable-stream: 3.6.2
 
-  iterall@1.3.0: {}
+  iterall@1.3.0:
+    optional: true
 
   iterare@1.2.1: {}
 
@@ -14913,6 +14876,7 @@ snapshots:
     transitivePeerDependencies:
       - bufferutil
       - utf-8-validate
+    optional: true
 
   superstruct@1.0.4: {}
 
@@ -14934,7 +14898,8 @@ snapshots:
 
   supports-preserve-symlinks-flag@1.0.0: {}
 
-  symbol-observable@1.2.0: {}
+  symbol-observable@1.2.0:
+    optional: true
 
   symbol-observable@4.0.0: {}
 
