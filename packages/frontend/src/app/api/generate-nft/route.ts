@@ -23,8 +23,26 @@ const pinata = new PinataSDK({
   pinataJWTKey: process.env.PINATA_JWT_KEY,
 });
 
-const REQUIRED_TOKEN_ADDRESS = process.env.NEXT_PUBLIC_REQUIRED_TOKEN_ADDRESS;
-const RPC_URL = process.env.BASE_SEPOLIA_RPC_URL || 'https://sepolia.base.org';
+// Network configuration
+const NETWORK_CONFIG = {
+  8453: { // Base mainnet
+    rpcUrl: process.env.BASE_RPC_URL || 'https://mainnet.base.org',
+    requiredTokenAddress: process.env.NEXT_PUBLIC_REQUIRED_TOKEN_ADDRESS_BASE || process.env.NEXT_PUBLIC_REQUIRED_TOKEN_ADDRESS
+  },
+  84532: { // Base Sepolia testnet
+    rpcUrl: process.env.BASE_SEPOLIA_RPC_URL || 'https://sepolia.base.org',
+    requiredTokenAddress: process.env.NEXT_PUBLIC_REQUIRED_TOKEN_ADDRESS_BASE_SEPOLIA || process.env.NEXT_PUBLIC_REQUIRED_TOKEN_ADDRESS
+  }
+} as const;
+
+// Helper function to get network configuration
+function getNetworkConfig(chainId: number) {
+  const config = NETWORK_CONFIG[chainId as keyof typeof NETWORK_CONFIG];
+  if (!config) {
+    throw new Error(`Unsupported chain ID: ${chainId}`);
+  }
+  return config;
+}
 
 // Helper function to convert ArrayBuffer to Readable stream
 function arrayBufferToStream(buffer: ArrayBuffer): Readable {
@@ -44,13 +62,24 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ success: false, error: 'Missing required parameters' }, { status: 400 });
     }
 
+    // Get network configuration
+    const networkConfig = getNetworkConfig(chainId);
+    if (!networkConfig) {
+      return NextResponse.json({ success: false, error: 'Unsupported chain ID' }, { status: 400 });
+    }
+    console.log("NETWORK CONFIG", networkConfig);
+    const { rpcUrl, requiredTokenAddress } = networkConfig;
+
     // Check ERC-20 token balance before generating
-    if (!REQUIRED_TOKEN_ADDRESS) {
-      return NextResponse.json({ success: false, error: 'Required token address not configured' }, { status: 500 });
+    if (!requiredTokenAddress) {
+      return NextResponse.json({ 
+        success: false, 
+        error: `Required token address not configured for chain ${chainId}` 
+      }, { status: 500 });
     }
 
-    const provider = new ethers.JsonRpcProvider(RPC_URL);
-    const tokenContract = new ethers.Contract(REQUIRED_TOKEN_ADDRESS, ERC20_ABI_ETHERS, provider);
+    const provider = new ethers.JsonRpcProvider(rpcUrl);
+    const tokenContract = new ethers.Contract(requiredTokenAddress, ERC20_ABI_ETHERS, provider);
     const balance: bigint = await tokenContract.balanceOf(account);
     if (balance <= 0n) {
       return NextResponse.json({ success: false, error: 'Insufficient token balance to generate an NFT.' }, { status: 403 });

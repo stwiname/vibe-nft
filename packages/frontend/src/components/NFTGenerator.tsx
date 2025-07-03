@@ -31,7 +31,7 @@ export function NFTGenerator() {
   const [showFullSize, setShowFullSize] = useState(false);
   
   const { mintNFT, loading: isMinting, canMint } = useVibeNFT();
-  const { address } = useAccount();
+  const { address, chainId } = useAccount();
 
   const generateNFT = async () => {
     setIsGenerating(true);
@@ -44,8 +44,15 @@ export function NFTGenerator() {
         setIsGenerating(false);
         return;
       }
+
+      if (!chainId) {
+        setError('Please connect to a supported network (Base or Base Sepolia).');
+        setIsGenerating(false);
+        return;
+      }
+
       const response = await fetch(
-        `/api/generate-nft?prompt=${encodeURIComponent(prompt)}&style=${encodeURIComponent(style)}&account=${address}`
+        `/api/generate-nft?prompt=${encodeURIComponent(prompt)}&style=${encodeURIComponent(style)}&account=${address}&chainId=${chainId}`
       );
       
       const data = await response.json();
