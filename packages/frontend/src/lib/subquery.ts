@@ -8,8 +8,12 @@ export interface SubQueryNFT {
   lastTransferredTimestamp: string;
 }
 
+const SUBQUERY_URLS: Record<number, string> = {
+  8453: process.env.NEXT_PUBLIC_SUBQUERY_URL_BASE || '',
+  84532: process.env.NEXT_PUBLIC_SUBQUERY_URL_BASE_SEPOLIA || '',
+}
 
-export async function fetchNFTsFromSubQuery(owner: string): Promise<SubQueryNFT[]> {
+export async function fetchNFTsFromSubQuery(owner: string, network: number): Promise<SubQueryNFT[]> {
   const query = `
     query GetUserNFTs($owner: String!) {
       nFTs(filter: { owner: { equalTo: $owner } }) {
@@ -24,7 +28,7 @@ export async function fetchNFTsFromSubQuery(owner: string): Promise<SubQueryNFT[
     }
   `;
 
-  const response = await fetch('http://localhost:3000/', {
+  const response = await fetch(SUBQUERY_URLS[network], {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ query, variables: { owner } }),

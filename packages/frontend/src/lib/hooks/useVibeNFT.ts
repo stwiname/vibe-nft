@@ -89,11 +89,11 @@ export function useVibeNFT() {
   });
 
   const fetchNFTs = async () => {
-    if (!address || !contractAddress || !publicClient) return;
+    if (!address || !contractAddress || !publicClient || !chainId) return;
     try {
       setLoading(true);
       setError(null);
-      const subqueryNFTs: SubQueryNFT[] = await fetchNFTsFromSubQuery(address);
+      const subqueryNFTs: SubQueryNFT[] = await fetchNFTsFromSubQuery(address, chainId);
       const nftData: NFTData[] = await Promise.all(subqueryNFTs.map(async (nft) => {
         let uri = '';
         let metadata = undefined;

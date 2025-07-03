@@ -46,6 +46,7 @@ export function getVibeNFTContractAddress(chainId: number): `0x${string}` {
   if (!address) {
     throw new Error(`No contract address configured for chain ${chainId}`);
   }
+  console.log("VIBE NFT CONTRACT ADDRESS", address);
   return address as `0x${string}`;
 }
 

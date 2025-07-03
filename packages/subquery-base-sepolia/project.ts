@@ -13,8 +13,8 @@ const mode = process.env.NODE_ENV || 'production';
 const dotenvPath = path.resolve(__dirname, `.env${mode !== 'production' ? `.${mode}` : ''}`);
 dotenv.config({ path: dotenvPath });
 
-const startHeight = process.env.START_HEIGHT ? parseInt(process.env.START_HEIGHT, 10) : 27264282;
-const contractAddress = process.env.CONTRACT_ADDRESS || '0xaAE9233dd84d24cd98124e6E8dA62079C9CdBC0d';
+const startHeight = process.env.START_HEIGHT ? parseInt(process.env.START_HEIGHT, 10) : 27875166;
+const contractAddress = process.env.CONTRACT_ADDRESS || '0x08e587bc0f634f5a97cd38f73a9f55bc53b4e054';
 
 // Can expand the Datasource processor types via the generic param
 const project: EthereumProject = {
