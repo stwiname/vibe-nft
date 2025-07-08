@@ -25,6 +25,7 @@ export async function fetchNFTsFromSubQuery(owner: string, network: number): Pro
       }
     }
   `;
+  console.log('SUBQUERY_URLS[network]', SUBQUERY_URLS[network]);
 
   const response = await fetch(SUBQUERY_URLS[network], {
     method: 'POST',

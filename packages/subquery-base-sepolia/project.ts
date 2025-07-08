@@ -11,7 +11,7 @@ const mode = process.env.NODE_ENV || 'production';
 
 // Load the appropriate .env file
 const dotenvPath = path.resolve(__dirname, `.env${mode !== 'production' ? `.${mode}` : ''}`);
-dotenv.config({ path: dotenvPath });
+dotenv.config({ path: dotenvPath, quiet: true });
 
 const startHeight = process.env.START_HEIGHT ? parseInt(process.env.START_HEIGHT, 10) : 27875166;
 const contractAddress = process.env.CONTRACT_ADDRESS || '0x08e587bc0f634f5a97cd38f73a9f55bc53b4e054';
